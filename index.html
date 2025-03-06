@@ -1,1 +1,117 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barış Mert - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Barış Mert</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Experienced architect specializing in sophisticated, self-sufficient, and technology-integrated architectural projects with artistic and modern aesthetics.</p>
+    </section>
+    
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-list">
+            <button class="project-title" onclick="toggleProject(1)">Ritz Carlton Hotel</button>
+            <button class="project-title" onclick="toggleProject(2)">My City Hotel</button>
+            <button class="project-title" onclick="toggleProject(3)">Kempinski Residence Astoria</button>
+            <!-- Other projects will be listed dynamically -->
+        </div>
+        <div id="project-details" class="hidden">
+            <h3 id="project-title"></h3>
+            <div class="carousel">
+                <button id="prev" onclick="prevImage()">&#10094;</button>
+                <img id="project-image" src="" alt="Project Image">
+                <button id="next" onclick="nextImage()">&#10095;</button>
+            </div>
+            <p id="project-description"></p>
+        </div>
+    </section>
+    
+    <section id="certifications">
+        <h2>Certifications & Achievements</h2>
+        <ul>
+            <li>Bilge Adam Software Specialization Certification</li>
+            <li>Hacettepe University Department First Prize</li>
+            <li>KOSGEB Entrepreneurship Training Certification</li>
+        </ul>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:barmert@gmail.com">barmert@gmail.com</a></p>
+        <p>Phone: +905325942486</p>
+    </section>
+    
+    <script>
+        const projects = {
+            1: { 
+                title: "Ritz Carlton Hotel", 
+                images: ["images/01_Ritz1.webp", "images/01_Ritz2.webp"],
+                description: "Project details about Ritz Carlton Hotel."
+            },
+            2: { 
+                title: "My City Hotel", 
+                images: ["images/02_MyCity1.webp", "images/02_MyCity2.webp"],
+                description: "Project details about My City Hotel."
+            },
+            3: { 
+                title: "Kempinski Residence Astoria", 
+                images: ["images/03_Kempinski1.webp", "images/03_Kempinski2.webp"],
+                description: "Project details about Kempinski Residence Astoria."
+            }
+        };
+        
+        let currentProject = null;
+        let currentImageIndex = 0;
+        
+        function toggleProject(projectId) {
+            if (currentProject === projectId) {
+                document.getElementById("project-details").classList.add("hidden");
+                currentProject = null;
+                return;
+            }
+            currentProject = projectId;
+            document.getElementById("project-title").textContent = projects[projectId].title;
+            document.getElementById("project-description").textContent = projects[projectId].description;
+            currentImageIndex = 0;
+            updateImage();
+            document.getElementById("project-details").classList.remove("hidden");
+        }
+        
+        function updateImage() {
+            document.getElementById("project-image").src = projects[currentProject].images[currentImageIndex];
+        }
+        
+        function prevImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateImage();
+            }
+        }
+        
+        function nextImage() {
+            if (currentImageIndex < projects[currentProject].images.length - 1) {
+                currentImageIndex++;
+                updateImage();
+            }
+        }
+    </script>
+</body>
+</html>
